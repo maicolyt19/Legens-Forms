@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postulación Staff - Legens Perks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        select, input, textarea, button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+            border: none;
+        }
+        select, button {
+            cursor: pointer;
+        }
+        form {
+            display: none;
+        }
+    </style>
+    <script>
+        function mostrarFormulario() {
+            let seleccion = document.getElementById("rol").value;
+            document.querySelectorAll("form").forEach(form => form.style.display = "none");
+            let formulario = document.getElementById(seleccion + "-form");
+            if (formulario) {
+                formulario.style.display = "block";
+            }
+        }
+
+        function enviarFormulario(idFormulario, rolNombre) {
+            const form = document.getElementById(idFormulario);
+            let respuestas = [];
+            form.querySelectorAll("input").forEach(input => {
+                respuestas.push(`**${input.previousElementSibling.innerText}**\n${input.value || "No respondido"}`);
+            });
+            
+            const payload = {
+                content: "<@&1336439530798190694>",
+                embeds: [{
+                    title: `📩 Nueva Postulación - ${rolNombre}`,
+                    description: respuestas.join("\n\n"),
+                    color: 5814783,
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            fetch("https://discord.com/api/webhooks/1336441438266855496/umRfqjrrLzIsnWiPnW7uWmN3E9yQbvyQyA7B8eQgD2EuHrr_O0XW44bGA0egv2ftxk41", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(() => alert("Formulario enviado con éxito"))
+            .catch(() => alert("Error al enviar el formulario"));
+        }
+    </script>
+</head>
+<body>
+    <h1>Postulación para Staff - Legens Perks</h1>
+    <label for="rol">¿A qué te quieres postular?</label>
+    <select id="rol" onchange="mostrarFormulario()">
+        <option value="">Selecciona una opción</option>
+        <option value="helper">Helper</option>
+        <option value="caza-allys">Caza Ally & Partner</option>
+        <option value="alter">Alter</option>
+    </select>
+    
+    <form id="caza-allys-form">
+        <h2>🔍 Formulario para ser Caza Ally & Partner 🔍</h2>
+        <label>¿Cuál es tu nombre en Discord?</label>
+        <input type="text">
+        <label>¿Cuántos años tienes?</label>
+        <input type="number">
+        <label>¿En qué país vives?</label>
+        <input type="text">
+        <label>¿Cuál es tu zona horaria?</label>
+        <input type="text">
+        <label>¿Cuánto tiempo llevas en el mundo de RW y en este servidor?</label>
+        <input type="text">
+        <label>¿Tienes experiencia contactando Ally o Partner para otros servidores?</label>
+        <input type="text">
+        <label>¿Sabes cómo hacer negociaciones o presentar un servidor a otros?</label>
+        <input type="text">
+        <label>¿Tienes alguna estrategia para contactar y persuadir a posibles aliados o partners?</label>
+        <input type="text">
+        <label>¿Tienes conocimientos sobre plataformas de promoción?</label>
+        <input type="text">
+        <label>¿Por qué te gustaría ser Caza Ally & Partner?</label>
+        <input type="text">
+        <button type="button" onclick="enviarFormulario('caza-allys-form', 'Caza Ally & Partner')">Enviar</button>
+    </form>
+
+    <form id="alter-form">
+        <h2>🛠️ Formulario para ser Alter 🛠️</h2>
+        <label>¿Cuál es tu nombre en Discord?</label>
+        <input type="text">
+        <label>¿Cuántos años tienes?</label>
+        <input type="number">
+        <label>¿En qué país vives?</label>
+        <input type="text">
+        <label>¿Cuál es tu zona horaria?</label>
+        <input type="text">
+        <label>¿Cuánto tiempo llevas en el mundo de RW?</label>
+        <input type="text">
+        <label>¿Tienes experiencia siendo Alter en otros servidores?</label>
+        <input type="text">
+        <label>¿Qué herramientas, métodos o sistemas manejas como Alter?</label>
+        <input type="text">
+        <label>¿Sabes generar o administrar cuentas?</label>
+        <input type="text">
+        <label>¿Has trabajado con logs, CCs o cuentas premium?</label>
+        <input type="text">
+        <label>¿Tienes conocimientos sobre seguridad y anonimato en RW?</label>
+        <input type="text">
+        <button type="button" onclick="enviarFormulario('alter-form', 'Alter')">Enviar</button>
+    </form>
+
+    <form id="helper-form">
+        <h2>🤝 Formulario para ser Helper 🤝</h2>
+        <label>¿Cuál es tu nombre en Discord?</label>
+        <input type="text">
+        <label>¿Cuántos años tienes?</label>
+        <input type="number">
+        <label>¿En qué país vives?</label>
+        <input type="text">
+        <label>¿Cuál es tu zona horaria?</label>
+        <input type="text">
+        <label>¿Tienes experiencia como Staff en otros servidores?</label>
+        <input type="text">
+        <label>¿Cuánto tiempo llevas en la comunidad de RW?</label>
+        <input type="text">
+        <label>¿Tienes conocimientos sobre métodos, tools, bases, etc.?</label>
+        <input type="text">
+        <label>¿Sabes cómo manejar bots de moderación en Discord?</label>
+        <input type="text">
+        <label>¿Por qué quieres ser Helper en nuestro servidor?</label>
+        <input type="text">
+        <label>¿Cuánto tiempo puedes dedicar al servidor cada día?</label>
+        <input type="text">
+        <button type="button" onclick="enviarFormulario('helper-form', 'Helper')">Enviar</button>
+    </form>
+</body>
+</html>
